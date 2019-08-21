@@ -33,6 +33,7 @@ function omdbfunction () {
           "\n Actors: " + movieInfo.Actors +
           "\n\n--------------------------------------------------------------------" ;
       console.log(printMovie)
+      logData(printMovie)
   })
   }
 
@@ -44,7 +45,7 @@ function liriDo () {
         }else if (data){
             var dataArr = data.split(",");
             console.log(dataArr[1])
-           // spotifySong(dataArr[1])
+            spotifySong(dataArr[1])
         }
         
     })
@@ -74,7 +75,7 @@ axios.get("https://rest.bandsintown.com/artists/" + newArtist + "/events?app_id=
         "\nWhen: " + moment(concertInfo[x].datetime).format("MM/DD/YYYY") +
         "\n_____________";
         console.log(concertInfo)
-       // logData(concertInfo)
+        logData(concertInfo)
         }
     })
 }
@@ -98,8 +99,39 @@ function spotifySong(input) {
                         "\nPreview Link: " + info[i].preview_url;
                         
                 console.log(spotifyResults);
-              //  logData(spotifyResults)
+                logData(spotifyResults)
             }
+        }
+    })
+}
+
+if (process.argv[2]=="do-what-it-says"){
+    liriDo();
+    
+    
+    }
+   
+    if (process.argv[2]=="spotify-this-song"){
+        
+        spotifySong(process.argv[3])
+    }
+
+    if (process.argv[2]=="concert-this"){
+        siriConcert()
+    }
+
+    if (process.argv[2] === "movie-this"){
+        omdbfunction()
+    }
+
+
+
+    //Bonus Log all results in a separate file
+    
+    function logData (logInfo){
+    fs.appendFileSync('log.txt', logInfo, function(error){
+        if(error) {
+            console.log("Something went wrong: ", error)
         }
     })
 }
