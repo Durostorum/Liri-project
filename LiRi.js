@@ -78,3 +78,28 @@ axios.get("https://rest.bandsintown.com/artists/" + newArtist + "/events?app_id=
         }
     })
 }
+
+
+function spotifySong(input) {
+    if(!input){
+        input = "The sign Ace of base"
+    }
+    spotify.search({type: "track", query: input}, function(error, data){
+        if(error) {
+            console.log("something happened: " + error)
+        } else {
+            var info = data.tracks.items;
+            for (var i = 0; i < 3; i++) {
+                var spotifyResults = 
+                    "--------------------------------------------------------------------" +
+                        "\nArtist(s): " + info[i].artists[0].name + 
+                        "\nSong Name: " + info[i].name +
+                        "\nAlbum Name: " + info[i].album.name +
+                        "\nPreview Link: " + info[i].preview_url;
+                        
+                console.log(spotifyResults);
+              //  logData(spotifyResults)
+            }
+        }
+    })
+}
