@@ -36,6 +36,18 @@ function omdbfunction () {
   })
   }
 
-
+//DO-WHAT IT SAYS function
+function liriDo () {
+    fs.readFile('random.txt', 'utf8', function(error, data){
+        if (error){
+            console.log(error)
+        }else if (data){
+            var dataArr = data.split(",");
+            console.log(dataArr[1])
+            spotifySong(dataArr[1])
+        }
+        
+    })
+}
 
 
