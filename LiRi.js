@@ -104,26 +104,24 @@ function spotifySong(input) {
         }
     })
 }
-
-if (process.argv[2]=="do-what-it-says"){
-    liriDo();
-    
-    
-    }
-   
-    if (process.argv[2]=="spotify-this-song"){
-        
+switch (process.argv[2]) {
+    case "do-what-it-says":
+        liriDo()
+        break;
+    case "spotify-this-song" :
         spotifySong(process.argv[3])
-    }
-
-    if (process.argv[2]=="concert-this"){
+        break;
+    case "concert-this":
         siriConcert()
-    }
-
-    if (process.argv[2] === "movie-this"){
+        break;
+    case "movie-this":
         omdbfunction()
-    }
+        break;
 
+    default:
+        console.log("Invalid command. Try using 'do-what-it-says', 'spotify-this-song', 'concert-this', 'movie-this'")
+        break;
+}
 
 
     //Bonus Log all results in a separate file
