@@ -44,10 +44,37 @@ function liriDo () {
         }else if (data){
             var dataArr = data.split(",");
             console.log(dataArr[1])
-            spotifySong(dataArr[1])
+           // spotifySong(dataArr[1])
         }
         
     })
 }
 
 
+
+// CONCERT-THIS FUNCTION
+function siriConcert() {
+    var nodeArtist = process.argv;
+    var newArtist = ""
+    for ( var i = 3; i < nodeArtist.length; i++){
+        if ( i > 2 && i < nodeArtist.length) {
+            newArtist = newArtist + nodeArtist[i];
+        } else {
+          newArtist += nodeArtist[i];
+        }
+      }
+        
+    //CONCEERT-THIS API CALL
+axios.get("https://rest.bandsintown.com/artists/" + newArtist + "/events?app_id=codingbootcamp").then(function(response) {
+    var concertInfo = response.data;
+    for( var x = 0; x < concertInfo.length; x++){
+        var concertInfo = "\n--------------------------------------------------------------------" +
+        "\nWhere: " + concertInfo[x].venue.name + 
+        "\nCity: " + concertInfo[x].venue.city +
+        "\nWhen: " + moment(concertInfo[x].datetime).format("MM/DD/YYYY") +
+        "\n_____________";
+        console.log(concertInfo)
+       // logData(concertInfo)
+        }
+    })
+}
